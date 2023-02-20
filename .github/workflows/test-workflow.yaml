@@ -1,0 +1,21 @@
+name: Test Workflow
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+jobs:
+  test_linux:
+    name: Example Job - ballerina-platform/setup-ballerina
+    runs-on: "ubuntu-latest" 
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Ballerina
+        uses: ballerina-platform/setup-ballerina@v1
+        with:
+          version: 2201.3.2
+      - name: Print Ballerina Version
+        run: bal version
+      - name: Build Ballerina Project
+        run: bal build
+        working-directory: my_project
